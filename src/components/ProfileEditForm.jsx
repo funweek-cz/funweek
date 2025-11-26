@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import ThumbnailControls from "./ThumbnailControls";
 
 export default function ProfileEditForm({ initialProfile, onSave }) {
@@ -68,7 +68,7 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
         updates.thumbnail_image = thumbnailUrl || null;
       }
 
-      const { error: updateError } = await supabase
+      const { error: updateError } = await clientSupabase
         .from("profiles")
         .update(updates)
         .eq("id", initialProfile.id);

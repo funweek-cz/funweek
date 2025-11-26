@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import { Mail, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 
 export default function OtpLoginPage() {
@@ -16,12 +16,12 @@ export default function OtpLoginPage() {
   const inputRefs = useRef([]);
 
   useEffect(() => {
-    supabase.auth
+    clientSupabase.auth
       .getSession()
       .then(({ data: { session } }) => setSession(session));
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) =>
+    } = clientSupabase.auth.onAuthStateChange((event, session) =>
       setSession(session),
     );
     return () => subscription.unsubscribe();
@@ -38,7 +38,7 @@ export default function OtpLoginPage() {
     setIsLoading(true);
     setError("");
 
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await clientSupabase.auth.signInWithOtp({
       email: email,
     });
 
@@ -83,7 +83,7 @@ export default function OtpLoginPage() {
       return;
     }
 
-    const { error } = await supabase.auth.verifyOtp({
+    const { error } = await clientSupabase.auth.verifyOtp({
       email: email,
       token: fullToken,
       type: "email",
@@ -100,7 +100,7 @@ export default function OtpLoginPage() {
     setIsLoading(true);
     setError("");
 
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await clientSupabase.auth.signInWithOtp({
       email: email,
     });
 

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/lib/supabaseClient";
-import ProfileDropdown from "./ProfileDropdown";
+import { clientSupabase } from "@/lib/supabase/client";
+import ProfileDropdown from "../ProfileDropdown";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
@@ -26,7 +26,7 @@ export default function Navbar() {
     const getUser = async () => {
       const {
         data: { user },
-      } = await supabase.auth.getUser();
+      } = await clientSupabase.auth.getUser();
       setUser(user);
     };
 
@@ -34,7 +34,7 @@ export default function Navbar() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = clientSupabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
     });
 
@@ -50,7 +50,7 @@ export default function Navbar() {
 
   const Logo = () => (
     <Link
-      href="/"
+      href="/public"
       className={`text-2xl font-bold ${scrolled ? "text-white" : "text-funweek"} hover:scale-95 transition-transform flex gap-2`}
     >
       <svg

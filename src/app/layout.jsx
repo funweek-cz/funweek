@@ -1,6 +1,6 @@
 import { Gabarito } from "next/font/google";
 import "@/styles/globals.css";
-import Navbar from "@/components/Navbar.jsx";
+import Navbar from "@/components/common/Navbar.jsx";
 
 const gabarito = Gabarito({
   variable: "--font-gabarito",

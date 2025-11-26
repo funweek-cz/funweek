@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import { Slide, toast, ToastContainer } from "react-toastify";
 
 function generateRandomString(length) {
@@ -46,7 +46,7 @@ export default function AvatarControls({
       const fileName = `${uid}-${Date.now()}-${generateRandomString(8)}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError } = await clientSupabase.storage
         .from("avatars")
         .upload(filePath, file, {
           cacheControl: "3600",
@@ -57,13 +57,13 @@ export default function AvatarControls({
         throw uploadError;
       }
 
-      const { data: publicUrlData } = supabase.storage
+      const { data: publicUrlData } = clientSupabase.storage
         .from("avatars")
         .getPublicUrl(filePath);
 
       const newAvatarUrl = publicUrlData.publicUrl;
 
-      const { error: updateError } = await supabase
+      const { error: updateError } = await clientSupabase
         .from("profiles")
         .update({ avatar_url: newAvatarUrl })
         .eq("id", uid);
@@ -78,7 +78,7 @@ export default function AvatarControls({
             avatarUrl.lastIndexOf("/") + 1,
           );
           if (oldFileName && oldFileName.length > 0) {
-            await supabase.storage.from("avatars").remove([oldFileName]);
+            await clientSupabase.storage.from("avatars").remove([oldFileName]);
           }
         } catch (e) {}
       }

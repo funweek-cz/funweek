@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback, useRef } from "react";
 import AvatarControls from "@/components/AvatarControls";
 import ProfileEditForm from "@/components/ProfileEditForm";
@@ -24,7 +24,7 @@ export default function ProfilePage() {
     const {
       data: { user },
       error: authError,
-    } = await supabase.auth.getUser();
+    } = await clientSupabase.auth.getUser();
 
     if (authError || !user) {
       router.push("/login");
@@ -34,7 +34,7 @@ export default function ProfilePage() {
 
     setUserId(user.id);
 
-    let { data, error } = await supabase
+    let { data, error } = await clientSupabase
       .from("profiles")
       .select(
         `id, full_name, email, avatar_url, visible_staff, instagram, linkedin, discord, visible_email, thumbnail_image, department, role`,

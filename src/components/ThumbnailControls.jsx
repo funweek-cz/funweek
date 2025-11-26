@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import { Upload, Trash2, Loader2, Image } from "lucide-react";
 
 function generateRandomString(length) {
@@ -45,7 +45,7 @@ export default function ThumbnailControls({
       const fileName = `${uid}-thumbnail-${Date.now()}-${generateRandomString(6)}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError } = await clientSupabase.storage
         .from("thumbnails") // ZDE JE SPRÁVNÝ BUCKET 'thumbnails'
         .upload(filePath, file, {
           cacheControl: "3600",
@@ -56,19 +56,19 @@ export default function ThumbnailControls({
         throw uploadError;
       }
 
-      const { data: publicUrlData } = supabase.storage
+      const { data: publicUrlData } = clientSupabase.storage
         .from("thumbnails")
         .getPublicUrl(filePath);
 
       const newThumbnailUrl = publicUrlData.publicUrl;
 
-      const { error: updateError } = await supabase
+      const { error: updateError } = await clientSupabase
         .from("profiles")
         .update({ thumbnail_image: newThumbnailUrl })
         .eq("id", uid);
 
       if (updateError) {
-        await supabase.storage
+        await clientSupabase.storage
           .from("thumbnails")
           .remove([filePath])
           .catch(() => {});
@@ -81,7 +81,7 @@ export default function ThumbnailControls({
             thumbnailUrl.lastIndexOf("/") + 1,
           );
           if (oldFileName && oldFileName.length > 0 && oldFileName !== "null") {
-            await supabase.storage.from("thumbnails").remove([oldFileName]);
+            await clientSupabase.storage.from("thumbnails").remove([oldFileName]);
           }
         } catch (e) {
           console.warn(
@@ -112,7 +112,7 @@ export default function ThumbnailControls({
       }
 
       // 1. Smazání z databáze
-      const { error: updateError } = await supabase
+      const { error: updateError } = await clientSupabase
         .from("profiles")
         .update({ thumbnail_image: null })
         .eq("id", uid);
@@ -126,7 +126,7 @@ export default function ThumbnailControls({
         thumbnailUrl.lastIndexOf("/") + 1,
       );
       if (fileName && fileName.length > 0 && fileName !== "null") {
-        const { error: removeError } = await supabase.storage
+        const { error: removeError } = await clientSupabase.storage
           .from("thumbnails")
           .remove([fileName]);
 

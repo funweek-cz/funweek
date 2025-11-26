@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabaseClient";
+import { clientSupabase } from "@/lib/supabase/client";
 import { CircleUserRound } from "lucide-react";
 
 export default function ProfileDropdown({ user, scrolled }) {
@@ -33,7 +33,7 @@ export default function ProfileDropdown({ user, scrolled }) {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await clientSupabase
           .from("profiles")
           .select("avatar_url, full_name")
           .eq("id", user.id)
@@ -49,7 +49,7 @@ export default function ProfileDropdown({ user, scrolled }) {
           if (data.avatar_url.startsWith("http")) {
             setAvatarUrl(data.avatar_url);
           } else {
-            const { data: urlData } = supabase.storage
+            const { data: urlData } = clientSupabase.storage
               .from("pfp")
               .getPublicUrl(data.avatar_url);
             setAvatarUrl(urlData.publicUrl);
@@ -68,7 +68,7 @@ export default function ProfileDropdown({ user, scrolled }) {
   }, [user?.id]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await clientSupabase.auth.signOut();
     router.push("/");
     setIsOpen(false);
   };

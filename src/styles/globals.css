@@ -23,9 +23,9 @@ body {
 }
 
 h1 {
-  font-family: var(--font-gabarito);
+    font-family: var(--font-gabarito), sans-serif;
 }
 
 #gabarito {
-  font-family: var(--font-gabarito);
+  font-family: var(--font-gabarito), sans-serif;
 }
