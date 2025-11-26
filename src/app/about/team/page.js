@@ -5,6 +5,22 @@ import { supabase } from '@/supabaseClient';
 
 const FALLBACK_IMAGE_URL = "https://yrrpusyjrzcaqqnydsuo.supabase.co/storage/v1/object/sign/usables/image-unavailable.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZGU0ZDUyMC01MjUzLTQ0ZjYtYWE2NS0xNDljMTUyMDQ0NDIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ1c2FibGVzL2ltYWdlLXVuYXZhaWxhYmxlLnBuZyIsImlhdCI6MTc2NDA2NTI1MCwiZXhwIjoxNzk1NjAxMjUwfQ.bBKczE8BMiqTYxtjg_VH4mZCE52rIx20-_iODCnZqjc";
 
+const getContrastColor = (hexColor) => {
+    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hexColor = hexColor.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
+
+    if (!result) return '#FFFFFF';
+
+    const r = parseInt(result[1], 16);
+    const g = parseInt(result[2], 16);
+    const b = parseInt(result[3], 16);
+
+    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+};
+
 const parseDepartment = (departmentString) => {
     if (!departmentString) {
         return { name: 'Neznámé', color: '#808080' };
@@ -14,6 +30,31 @@ const parseDepartment = (departmentString) => {
     const color = parts[1] ? `#${parts[1].replace('#', '')}` : '#808080';
     return { name, color };
 };
+
+const parseTag = (tagString) => {
+    if (!tagString || tagString.trim() === '') {
+        return null;
+    }
+
+    const cleanTagString = tagString.split('|')[0];
+    const parts = cleanTagString.split(';');
+
+    if (parts.length < 3) {
+        const content = parts[0] || 'Tag';
+        const color = parts[1] ? `#${parts[1].replace('#', '')}` : '#808080';
+        return { emoji: '', text: content, color: color, textColor: getContrastColor(color) };
+    }
+
+    const emoji = parts[0].trim();
+    const text = parts[1].trim();
+    const color = parts[2] ? `#${parts[2].replace('#', '')}` : '#808080';
+
+    const textColor = getContrastColor(color);
+
+    return { emoji, text, color, textColor };
+};
+
+
 const generateSocialUrl = (platform, value) => {
     if (!value) return null;
     value = value.trim();
@@ -83,7 +124,7 @@ export default function TeamPage() {
         const fetchTeam = async () => {
             let { data, error } = await supabase
                 .from('profiles')
-                .select('full_name, role, department, thumbnail_image, instagram, linkedin, discord, visible_email, priority')
+                .select('full_name, role, department, tag, thumbnail_image, instagram, linkedin, discord, visible_email, priority')
                 .eq('visible_staff', true)
                 .not('role', 'is', null)
                 .order('priority', { ascending: true, nullsFirst: false })
@@ -97,6 +138,7 @@ export default function TeamPage() {
 
             const mappedTeam = data.map(profile => {
                 const { name: depName, color: depColor } = parseDepartment(profile.department);
+                const tag = parseTag(profile.tag);
 
                 const socials = {
                     email: profile.visible_email ? `mailto:${profile.visible_email}` : null,
@@ -111,6 +153,7 @@ export default function TeamPage() {
                     role: profile.role,
                     department: depName,
                     depColor: depColor,
+                    tag: tag,
                     image: finalImageUrl,
                     socials: socials,
                     availability: null,
@@ -158,7 +201,7 @@ export default function TeamPage() {
         );
     }
 
-    const hexToRgba = (hex, alpha) => { // gemini
+    const hexToRgba = (hex, alpha) => {
         const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
         hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
 
@@ -180,14 +223,28 @@ export default function TeamPage() {
                 <span className="text-center text-xl px-5 md:px-25">Naše filozofie je o aktivním budování důvěry a respektu. Věříme v sílu autenticity a diverzity a zavazujeme se tyto hodnoty rozvíjet. Neomezujeme se jen na žáky základních škol – naším cílem je posílit sebevědomí a plný potenciál v každém, kdo s námi sdílí cestu.</span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center items-center gap-10 mt-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center items-center gap-10 mt-10 w-full">
                 {teamData.map((member, index) => (
                     <div key={index}
                          className="flex p-3 bg-cover flex-col w-full items-center gap-2 border-funweek rounded-xl aspect-[2/3] justify-end"
                          style={{ backgroundImage: `url('${member.image}')` }}
                     >
-                        <div className="flex flex-row items-center gap-1">
+                        <div className="flex flex-row items-center gap-1 flex-wrap justify-center">
                             <div className="text-sm rounded-full bg-opacity-10 text-white px-2" id="gabarito" style={{ backgroundColor: hexToRgba(member.depColor, 0.7)}}>{member.department}</div>
+
+                            {member.tag && (
+                                <div
+                                    className="text-sm rounded-full bg-opacity-10 px-2 flex flex-row items-center content-center"
+                                    style={{
+                                        backgroundColor: hexToRgba(member.tag.color, 0.7),
+                                        color: member.tag.textColor // contrast
+                                    }}
+                                    id="gabarito"
+                                >
+                                    {member.tag.emoji} {member.tag.text}
+                                </div>
+                            )}
+
                             {member?.availability && ( <div className="text-sm rounded-full bg-red-800 text-white px-2 flex flex-row items-center content-center gap-1" id="gabarito"> <img src="https://i.imgur.com/iP7i12F.png" width="10" alt="Availability icon" /> {member.availability}</div> )}
                         </div>
                         <div className="bg-funweek/70 backdrop-blur w-full rounded-xl text-white p-2 leading-none flex items-center flex-col">
