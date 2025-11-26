@@ -182,7 +182,7 @@ export default function TeamPage() {
 
     if (loading) {
         return (
-            <main className="w-full px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
+            <main className="w-full h-100 px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
                 <p>Načítání stránky...</p>
             </main>
         );

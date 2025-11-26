@@ -96,7 +96,7 @@ export default function ProfilePage() {
 
     if (loading || !profile) {
         return (
-            <main className="w-full px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
+            <main className="w-full h-100 px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
                 <p>Načítání profilu...</p>
             </main>
         );

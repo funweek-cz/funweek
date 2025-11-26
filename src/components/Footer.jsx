@@ -50,7 +50,7 @@ export default function Footer() {
                     <img src="/logo-green.svg" alt="Logo" className="w-0 md:w-5" width="20" />
                 </a>
                 <div>
-                    <p className="text-sm text-funweek">© 2025 Funweek - Všechna práva vyhrazena.</p>
+                    <p className="text-sm text-funweek">© 2025 Funweek - Všechna práva vyhrazena</p>
                 </div>
             </div>
         </footer>
