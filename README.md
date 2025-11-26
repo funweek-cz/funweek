@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Funweek Web – Informace pro vývojáře**
 
-## Getting Started
+Vítejte v repozitáři **Funweek Web**! Tento dokument slouží jako přehled důležitých informací pro všechny vývojáře, kteří na projektu pracují nebo se k němu chtějí připojit.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+* **Supabase** – Backend-as-a-Service (auth, databáze, API).
+* **Next.js** – hlavní framework pro frontend i server-side logiku.
+* **React** – základní UI knihovna.
+* **Tailwind CSS v4** – pro rychlé a efektivní stylování.
+* **PNPM** – správce balíčků.
+
+---
+
+## 📦 PNPM – Rychlý úvod
+
+Používáme **pnpm** místo **npm** nebo **yarn**, protože je rychlejší, efektivnější a pracuje chytře s diskovým místem.
+
+> 🔧 **Použití je téměř stejné jako u npm – jen místo `npm` píšeme `pnpm`.**
+
+### Základní příkazy:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install        # Instalace všech závislostí
+pnpm add <balík>    # Přidání balíčku
+pnpm remove <balík> # Odebrání balíčku
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+## ▶️ Spuštění vývojového serveru
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm dev
+```
 
-## Learn More
+Aplikace se spustí obvykle na: `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Stylování – Tailwind CSS v4
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Tailwind je předkonfigurovaný.
+* Doporučuje se používat utility-first přístup.
+* Dokumentace: [https://tailwindcss.com/](https://tailwindcss.com/)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Konvenční commity
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pro přehlednější historii doporučujeme používat **Conventional Commits**.
+
+Příklad:
+
+```
+feat: přidána nová komponenta headeru
+fix: opraveno chování tlačítka v mobilu
+refactor: zjednodušena logika ve utils
+```
+
+### Rychlé shrnutí:
+
+* **feat:** nová funkce
+* **fix:** oprava bugů
+* **refactor:** úpravy kódu bez změny chování
+* **chore:** údržba repa, buildu atd.
+* **docs:** změny dokumentace
+* **style:** úpravy formátování, žádný kód
+
+Oficiální specifikace: [https://www.conventionalcommits.org/](https://www.conventionalcommits.org/)
+
+---
+
+## 📂 Struktura projektu
+
+### ❗ Poznámka k TypeScriptu
+
+V projektu **nepoužíváme TypeScript**, pouze čistý JavaScript.
+
+## 📂 Struktura projektu (doporučený přehled)
+
+```
+/src
+  /app          # Hlavní Next.js routing
+  /components   # Sdílené React komponenty
+  /lib          # Pomocné funkce, klienti, služby
+  /styles       # Tailwind a globální styly
+```
+
+---
+
+## 🛠️ Linting & Formátování
+
+Doporučené nástroje:
+
+* **ESLint** – kontrola kvality kódu
+* **Prettier** – automatické formátování
+
+Spuštění lintu:
+
+```bash
+pnpm lint
+```
+
+---
+
+## 📘 Uživatelské přístupy & Env proměnné
+
+* Všechny proměnné prostředí patří do `.env.local` (nikdy necommituje!).
+* Pokud potřebujete novou env proměnnou, napište ostatním vývojářům.
+
+---
+
+## 🤝 Contribuce
+
+1. Vytvořte si větev pojmenovanou dle konvenčních commitů / feature názvů.
+2. Dodržujte strukturu kódu a formátovací pravidla.
+3. Pište čistý a čitelný kód.
+
+---
+
+Pokud vás napadne něco dalšího, co by se mělo do README přidat, klidně aktualizujte nebo navrhněte úpravu! 🚀✨
