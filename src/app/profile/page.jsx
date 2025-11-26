@@ -1,12 +1,11 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { useEffect, useState, useCallback, useRef } from "react";
 import AvatarControls from '@/components/AvatarControls';
 import ProfileEditForm from '@/components/ProfileEditForm';
-import { Pencil } from "lucide-react"; // Import Pencil z lucide-react doplněn
-// Odebrán nepoužívaný import: import { ToastContainer, toast } from 'react-toastify';
+import { Pencil } from "lucide-react";
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState(null);

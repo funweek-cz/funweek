@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { Mail, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 
 export default function OtpLoginPage() {

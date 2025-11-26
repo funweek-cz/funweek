@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { supabase } from '@/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { Upload, Trash2, Loader2, Image } from 'lucide-react';
 
 function generateRandomString(length) {

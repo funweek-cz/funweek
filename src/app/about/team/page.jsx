@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import { supabase } from '@/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
+import Image from "next/image";
 
 const FALLBACK_IMAGE_URL = "https://yrrpusyjrzcaqqnydsuo.supabase.co/storage/v1/object/sign/usables/image-unavailable.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZGU0ZDUyMC01MjUzLTQ0ZjYtYWE2NS0xNDljMTUyMDQ0NDIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ1c2FibGVzL2ltYWdlLXVuYXZhaWxhYmxlLnBuZyIsImlhdCI6MTc2NDA2NTI1MCwiZXhwIjoxNzk1NjAxMjUwfQ.bBKczE8BMiqTYxtjg_VH4mZCE52rIx20-_iODCnZqjc";
 
@@ -58,7 +59,7 @@ const DiscordCopyButton = ({ discordHandle }) => {
                 className="hover:scale-110 transition-all opacity-50 hover:opacity-100 p-0 m-0"
                 style={{ background: 'none', border: 'none', cursor: 'pointer' }}
             >
-                <img
+                <Image
                     src={iconSrc}
                     width="20"
                     alt="Discord"
@@ -127,7 +128,7 @@ export default function TeamPage() {
     if (error) {
         return (
             <main className="w-full px-50 py-50 flex flex-col justify-center items-center">
-                <img src="/die.png" width="100" className="mb-10"/>
+                <Image alt={"Die"} src="/die.png" width="100" className="mb-10"/>
                 <h1 className="text-4xl font-bold">Server udělal bác...</h1>
                 <h2 className="text-2xl text-center">Omlouváme se, ale nemůžeme přistoupit k datům na našich serverech. Pokud chyba přetrvává, kontaktujte prosím technický tým na <a src="mailto:it@funweek.cz" className="underline cursor-pointer">it@funweek.cz</a></h2>
                 <a href="/funweek/public" className="font-bold mt-10 px-4 py-2 rounded-lg block group bg-funweek hover:scale-95 transition-all text-white ">
@@ -148,7 +149,7 @@ export default function TeamPage() {
     if (teamData.length === 0) {
         return (
             <main className="w-full px-50 py-50 flex flex-col justify-center items-center">
-                <img src="/die.png" width="100" className="mb-10"/>
+                <Image alt={"Die"} src="/die.png" width="100" className="mb-10"/>
                 <h1 className="text-4xl font-bold">Server vrátil null...</h1>
                 <h2 className="text-2xl text-center">Omlouváme se, v tuto chvíli nemůžeme přistoupit k datům na našich serverech. Pokud tuto hlášku vidíte, o chybě už víme a pracujeme na opravě. Pro více informací kontaktujte náš technický tým na <a src="mailto:it@funweek.cz" className="underline cursor-pointer">it@funweek.cz</a>. Díky za trpělivost.</h2>
                 <a href="/funweek/public" className="font-bold mt-10 px-4 py-2 rounded-lg block group bg-funweek hover:scale-95 transition-all text-white ">

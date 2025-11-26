@@ -1,6 +1,6 @@
 "use client"
 import { useState, useRef } from "react";
-import { supabase } from '@/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import ThumbnailControls from './ThumbnailControls';
 
 export default function ProfileEditForm({ initialProfile, onSave }) {
