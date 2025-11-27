@@ -23,7 +23,6 @@ export default function AvatarControls({
   fileInputRef,
 }) {
   const [uploading, setUploading] = useState(false);
-  const [removing, setRemoving] = useState(false);
 
   const uploadAvatar = async (event) => {
     try {

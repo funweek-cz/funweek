@@ -39,7 +39,7 @@ const getTeamData = async () => {
     };
     const finalImageUrl =
       profile.thumbnail_image ||
-      "/assets/images/content/image-unavailable.webp";
+      "/assets/images/content/team-member-thumbnail-unavailable.webp";
 
     return {
       name: profile.full_name,
@@ -85,7 +85,7 @@ export default async function TeamPage() {
           <>
             <Image
               alt={"Die emoji"}
-              src="/assets/images/ui/die.png"
+              src="/assets/images/ui/die.webp"
               width="100"
               height="100"
               className="mb-4"

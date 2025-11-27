@@ -19,7 +19,7 @@ export const metadata = {
     siteName: "Funweek",
     images: [
       {
-        url: "https://yrrpusyjrzcaqqnydsuo.supabase.co/storage/v1/object/sign/usables/thumbnail.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kZGU0ZDUyMC01MjUzLTQ0ZjYtYWE2NS0xNDljMTUyMDQ0NDIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ1c2FibGVzL3RodW1ibmFpbC5wbmciLCJpYXQiOjE3NjQxMDM3MzEsImV4cCI6MTc5NTYzOTczMX0.F5JTqNpEaR24Z6AnM8VI6nyPCQkuD5vSPQp3AqSOyPE",
+        url: "/assets/images/brand/thumbnail.png",
         width: 1047,
         height: 628,
         alt: "funweek-thumbnail",
@@ -39,9 +39,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="cs">
-      <body
-        className={`${gabarito.variable} antialiased`}
-      >
+      <body className={`${gabarito.variable} antialiased`}>
         <Navbar />
         {children}
       </body>

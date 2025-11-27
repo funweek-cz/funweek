@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main className="w-full px-5 md:px-50 py-30 md:py-50 flex flex-col justify-center items-center">
       <Image
-        src="/die.png"
+        src="/assets/images/ui/die.webp"
         alt={"Die Emoji"}
         width={"100"}
         height={"100"}
