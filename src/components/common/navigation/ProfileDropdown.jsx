@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { clientSupabase } from "@/lib/supabase/client";
-import { CircleUserRound } from "lucide-react";
+import { LuCircleUserRound } from "react-icons/lu";
 
 export default function ProfileDropdown({ user, scrolled }) {
   const router = useRouter();
@@ -111,7 +111,7 @@ export default function ProfileDropdown({ user, scrolled }) {
             `}
       >
         <div className="font-semibold text-funweek bg-white rounded-md px-4 py-2 text-sm mb-1 flex flex-row items-center gap-1">
-          <CircleUserRound width="17" />
+          <LuCircleUserRound size={17} />
           <span className="text-sm">{fullName}</span>
         </div>
         <Link

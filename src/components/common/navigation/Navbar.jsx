@@ -4,10 +4,12 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { clientSupabase } from "@/lib/supabase/client";
 import ProfileDropdown from "./ProfileDropdown";
-import { Menu, X, ChevronDown } from "lucide-react";
 import Logo from "@/components/common/Logo";
 import NavbarItemSingle from "@/components/common/navigation/NavbarItemSingle";
 import NavbarItemMulti from "@/components/common/navigation/NavbarItemMulti";
+import { LuMenu, LuX } from "react-icons/lu";
+import NavbarItemSingleMobile from "@/components/common/navigation/NavbarItemSingleMobile";
+import NavbarItemMultiMobile from "@/components/common/navigation/NavbarItemMultiMobile";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,6 +51,11 @@ export default function Navbar() {
   }`;
   const loginButtonClasses = `border-2 hover:bg-white/10 ${authLinkClasses}`;
 
+  const aboutDropdownLinks = [
+    { label: "Co je Funweek?", link: "/about/project" },
+    { label: "Náš tým", link: "/about/team" },
+  ];
+
   return (
     <>
       <nav
@@ -70,10 +77,7 @@ export default function Navbar() {
             <NavbarItemMulti
               scrolled={scrolled}
               label={"O projektu"}
-              links={[
-                { label: "Co je Funweek?", link: "/about/project" },
-                { label: "Náš tým", link: "/about/team" },
-              ]}
+              links={aboutDropdownLinks}
             />
             <NavbarItemSingle
               scrolled={scrolled}
@@ -100,7 +104,7 @@ export default function Navbar() {
               className={`p-2 rounded-full transition-colors duration-300 ${scrolled ? "text-white hover:bg-white/10" : "text-funweek hover:bg-funweek/10"}`}
               aria-label="Toggle Menu"
             >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMobileMenuOpen ? <LuX size={28} /> : <LuMenu size={28} />}
             </button>
           </div>
         </div>
@@ -116,7 +120,7 @@ export default function Navbar() {
           className="absolute top-6 right-6 p-2 rounded-full text-white hover:bg-white/10 transition-colors"
           aria-label="Close Menu"
         >
-          <X size={32} />
+          <LuX size={32} />
         </button>
 
         <ul className="flex flex-col space-y-4 text-xl mt-12">
@@ -131,60 +135,23 @@ export default function Navbar() {
               </Link>
             )}
           </li>
-          <li>
-            <Link
-              href="/volunteers"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 font-bold hover:bg-white/10 rounded-lg px-4 transition-colors"
-            >
-              Dobrovolnictvo
-            </Link>
-          </li>
+          <NavbarItemSingleMobile
+            link={"/volunteers"}
+            label={"Dobrovolnictvo"}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
 
-          <li className="relative">
-            <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex justify-between items-center w-full py-2 font-bold hover:bg-white/10 rounded-lg px-4 transition-colors z-50"
-            >
-              O projektu
-              <ChevronDown
-                className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`}
-                size={20}
-              />
-            </button>
-            <ul
-              className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out ${isDropdownOpen ? "max-h-40 mt-2" : "max-h-0"}`}
-            >
-              <li>
-                <a
-                  href="/about/project"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block font-semibold hover:bg-white/5 px-4 py-3 rounded-lg transition-all"
-                >
-                  Co je Funweek?
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/about/team"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block font-semibold hover:bg-white/5 px-4 py-3 rounded-lg transition-all"
-                >
-                  Náš tým
-                </a>
-              </li>
-            </ul>
-          </li>
+          <NavbarItemMultiMobile
+            closeMenuFunction={() => setIsDropdownOpen(!isDropdownOpen)}
+            label={"O projektu"}
+            links={aboutDropdownLinks}
+          />
 
-          <li>
-            <Link
-              href="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block py-2 font-bold hover:bg-white/10 rounded-lg px-4 transition-colors"
-            >
-              Kontakt
-            </Link>
-          </li>
+          <NavbarItemSingleMobile
+            link={"/contact"}
+            label={"Kontakt"}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
         </ul>
       </div>
     </>
