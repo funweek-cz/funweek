@@ -3,7 +3,7 @@ import { Milestone, Rss } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="px-5">
+        <footer className="px-5 mt-10">
             <div className="max-w-7xl mx-auto py-10 px-10 bg-funweek text-white rounded-2xl">
                 <div className="justify-between items-top w-full flex flex-col gap-5 md:gap-0 md:flex-row">
                     <div className="flex flex-col items-top">

@@ -217,13 +217,13 @@ export default function TeamPage() {
     };
 
     return (
-        <main className="w-full px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
+        <main className="max-w-7xl px-5 sm:px-0 mx-auto mt-30 flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-2">
                 <h1 className="text-center text-4xl mb-3 md:mb-0 md:text-5xl font-bold md:leading-15">Spojuje nás vize světa, kde se každý cítí být rovnocenný a přijatý.</h1>
                 <span className="text-center text-xl px-5 md:px-25">Naše filozofie je o aktivním budování důvěry a respektu. Věříme v sílu autenticity a diverzity a zavazujeme se tyto hodnoty rozvíjet. Neomezujeme se jen na žáky základních škol – naším cílem je posílit sebevědomí a plný potenciál v každém, kdo s námi sdílí cestu.</span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center items-center gap-10 mt-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center items-center gap-10 mt-10 mb-5 w-full">
                 {teamData.map((member, index) => (
                     <div key={index}
                          className="flex p-3 bg-cover flex-col w-full items-center gap-2 border-funweek rounded-xl aspect-[2/3] justify-end"
