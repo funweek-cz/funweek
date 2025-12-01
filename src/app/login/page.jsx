@@ -3,7 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { clientSupabase } from "@/lib/supabase/client";
-import { Mail, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
+import {
+  LuArrowLeft,
+  LuArrowRight,
+  LuLoaderCircle,
+  LuMail,
+} from "react-icons/lu";
 
 export default function OtpLoginPage() {
   const router = useRouter();
@@ -142,7 +147,7 @@ export default function OtpLoginPage() {
                     Email
                   </label>
                   <div className="relative">
-                    <Mail
+                    <LuMail
                       className="absolute left-3 top-1/2 -translate-y-1/2 text-funweek/50"
                       size={20}
                     />
@@ -167,10 +172,10 @@ export default function OtpLoginPage() {
                   className="w-full font-bold bg-funweek text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-funweek/40"
                 >
                   {isLoading ? (
-                    <Loader2 className="animate-spin" size={20} />
+                    <LuLoaderCircle className="animate-spin" size={20} />
                   ) : (
                     <>
-                      Pokračovat <ArrowRight size={20} />
+                      Pokračovat <LuArrowRight size={20} />
                     </>
                   )}
                 </button>
@@ -227,7 +232,7 @@ export default function OtpLoginPage() {
                     className="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-all duration-300 hover:bg-gray-200 flex items-center justify-center gap-2"
                     disabled={isLoading}
                   >
-                    <ArrowLeft size={20} /> Zpět
+                    <LuArrowLeft size={20} /> Zpět
                   </button>
                   <button
                     type="submit"
@@ -235,10 +240,10 @@ export default function OtpLoginPage() {
                     className="flex-1 bg-funweek text-white py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-funweek/40"
                   >
                     {isLoading ? (
-                      <Loader2 className="animate-spin" size={20} />
+                      <LuLoaderCircle className="animate-spin" size={20} />
                     ) : (
                       <>
-                        Pokračovat <ArrowRight size={20} />
+                        Pokračovat <LuArrowRight size={20} />
                       </>
                     )}
                   </button>
