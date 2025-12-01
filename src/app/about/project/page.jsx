@@ -1,11 +1,12 @@
 import React from "react";
-import { CookingPot } from "lucide-react";
+
 import Link from "next/link";
+import { LuCookingPot } from "react-icons/lu";
 
 export default function ProjectPage() {
   return (
     <main className="w-full px-5 md:px-50 py-30 md:py-50 flex flex-col justify-center items-center">
-      <CookingPot size="100" className="mb-10 text-funweek" />
+      <LuCookingPot size="100" className="mb-10 text-funweek" />
       <h1 className="text-4xl font-bold text-center mb-5 md:mb-0">
         Tuto stránku teprve vaříme!
       </h1>
