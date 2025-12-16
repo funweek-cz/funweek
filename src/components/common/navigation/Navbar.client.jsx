@@ -11,9 +11,8 @@ import { LuMenu, LuX } from "react-icons/lu";
 import NavbarItemSingleMobile from "@/components/common/navigation/NavbarItemSingleMobile";
 import NavbarItemMultiMobile from "@/components/common/navigation/NavbarItemMultiMobile";
 
-export default function Navbar() {
+export default function NavbarClient({ user }) {
   const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -25,25 +24,6 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const {
-        data: { user },
-      } = await clientSupabase.auth.getUser();
-      setUser(user);
-    };
-
-    getUser();
-
-    const {
-      data: { subscription },
-    } = clientSupabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
   }, []);
 
   const authLinkClasses = `font-bold px-4 py-2 rounded-lg block transition-colors duration-300 ${

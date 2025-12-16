@@ -34,7 +34,7 @@ export default function OtpLoginPage() {
 
   useEffect(() => {
     if (session) {
-      router.push("/profile");
+      router.push("/dashboard/profile");
     }
   }, [session, router]);
 
