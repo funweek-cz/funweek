@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { clientSupabase } from "@/lib/supabase/client";
 import { LuCircleUserRound } from "react-icons/lu";
+import Image from "next/image";
 
-export default function ProfileDropdown({ user, scrolled }) {
+export default function ProfileDropdown({ userData, scrolled }) {
   const router = useRouter();
-  const [avatarUrl, setAvatarUrl] = useState(null);
-  const [fullName, setFullName] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
-  const initial = fullName ? fullName[0].toUpperCase() : "?";
+  const initial = userData.full_name
+    ? userData.full_name[0].toUpperCase()
+    : "?";
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -29,43 +29,6 @@ export default function ProfileDropdown({ user, scrolled }) {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [isOpen]);
-
-  useEffect(() => {
-    async function loadProfile() {
-      try {
-        const { data, error } = await clientSupabase
-          .from("profiles")
-          .select("avatar_url, full_name")
-          .eq("id", user.id)
-          .single();
-
-        if (error) throw error;
-
-        if (data?.full_name) {
-          setFullName(data.full_name);
-        }
-
-        if (data?.avatar_url) {
-          if (data.avatar_url.startsWith("http")) {
-            setAvatarUrl(data.avatar_url);
-          } else {
-            const { data: urlData } = clientSupabase.storage
-              .from("pfp")
-              .getPublicUrl(data.avatar_url);
-            setAvatarUrl(urlData.publicUrl);
-          }
-        }
-      } catch (err) {
-        console.error("Chyba při načítání profilu:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    if (user?.id) {
-      loadProfile();
-    }
-  }, [user?.id]);
 
   const handleLogout = async () => {
     await clientSupabase.auth.signOut();
@@ -83,18 +46,17 @@ export default function ProfileDropdown({ user, scrolled }) {
         id="gabarito"
         className={`w-9 h-9 rounded-full content-center text-center font-bold text-sm overflow-hidden cursor-pointer transition-all duration-300 focus:outline-none ${
           scrolled
-            ? "bg-funweek text-white border-1 border-white"
+            ? "bg-funweek text-white border border-white"
             : "bg-funweek text-white"
         }`}
       >
-        {loading ? (
-          <span>{initial}</span>
-        ) : avatarUrl ? (
-          <img
-            src={avatarUrl}
+        {userData.avatar_url ? (
+          <Image
+            width={36}
+            height={36}
+            src={userData.avatar_url}
             alt="Avatar"
             className="w-full h-full object-cover"
-            onError={() => setAvatarUrl(null)}
           />
         ) : (
           <span>{initial}</span>
@@ -112,10 +74,10 @@ export default function ProfileDropdown({ user, scrolled }) {
       >
         <div className="font-semibold text-funweek bg-white rounded-md px-4 py-2 text-sm mb-1 flex flex-row items-center gap-1">
           <LuCircleUserRound size={17} />
-          <span className="text-sm">{fullName}</span>
+          <span className="text-sm">{userData.full_name}</span>
         </div>
         <Link
-          href="/profile"
+          href="/dashboard/profile"
           onClick={() => setIsOpen(false)}
           className="block font-semibold text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-all whitespace-nowrap"
         >

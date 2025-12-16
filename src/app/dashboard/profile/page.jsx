@@ -5,7 +5,7 @@ import { clientSupabase } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback, useRef } from "react";
 import AvatarControls from "@/components/AvatarControls";
 import ProfileEditForm from "@/components/ProfileEditForm";
-import { Pencil } from "lucide-react";
+import { LuPencil } from "react-icons/lu";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
@@ -140,7 +140,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="absolute inset-0 bg-black text-white bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <Pencil />
+              <LuPencil />
             </div>
           </div>
 

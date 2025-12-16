@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { clientSupabase } from "@/lib/supabase/client";
-import { Upload, Trash2, Loader2, Image } from "lucide-react";
+import { LuLoaderCircle, LuTrash2, LuUpload } from "react-icons/lu";
+import Image from "next/image";
 
 function generateRandomString(length) {
   let result = "";
@@ -81,7 +82,9 @@ export default function ThumbnailControls({
             thumbnailUrl.lastIndexOf("/") + 1,
           );
           if (oldFileName && oldFileName.length > 0 && oldFileName !== "null") {
-            await clientSupabase.storage.from("thumbnails").remove([oldFileName]);
+            await clientSupabase.storage
+              .from("thumbnails")
+              .remove([oldFileName]);
           }
         } catch (e) {
           console.warn(
@@ -163,7 +166,7 @@ export default function ThumbnailControls({
 
       <div className="w-20 h-30 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100 border border-gray-300 flex-shrink-0">
         {thumbnailUrl ? (
-          <img
+          <Image
             src={thumbnailUrl}
             alt="Thumbnail"
             className="w-full h-full object-cover"
@@ -191,11 +194,12 @@ export default function ThumbnailControls({
         >
           {uploading ? (
             <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Nahrávám...
+              <LuLoaderCircle className="w-4 h-4 mr-2 animate-spin" />{" "}
+              Nahrávám...
             </>
           ) : (
             <>
-              <Upload className="w-4 h-4 mr-2" />{" "}
+              <LuUpload className="w-4 h-4 mr-2" />{" "}
               {thumbnailUrl ? "Změnit obrázek" : "Nahrát obrázek"}
             </>
           )}
@@ -214,11 +218,11 @@ export default function ThumbnailControls({
           >
             {removing ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Mažu...
+                <LuLoaderCircle className="w-4 h-4 mr-2 animate-spin" /> Mažu...
               </>
             ) : (
               <>
-                <Trash2 className="w-4 h-4 mr-2" /> Odstranit
+                <LuTrash2 className="w-4 h-4 mr-2" /> Odstranit
               </>
             )}
           </button>

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { clientSupabase } from "@/lib/supabase/client";
 import ProfileDropdown from "./ProfileDropdown";
 import Logo from "@/components/common/Logo";
 import NavbarItemSingle from "@/components/common/navigation/NavbarItemSingle";
@@ -11,14 +10,14 @@ import { LuMenu, LuX } from "react-icons/lu";
 import NavbarItemSingleMobile from "@/components/common/navigation/NavbarItemSingleMobile";
 import NavbarItemMultiMobile from "@/components/common/navigation/NavbarItemMultiMobile";
 
-export default function NavbarClient({ user }) {
+export default function NavbarClient({ user, userData }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScroll = window.pageYOffset;
+      const currentScroll = window.scrollY;
       setScrolled(currentScroll > 50);
     };
 
@@ -67,7 +66,7 @@ export default function NavbarClient({ user }) {
 
             <li>
               {user ? (
-                <ProfileDropdown user={user} scrolled={scrolled} />
+                <ProfileDropdown userData={userData} scrolled={scrolled} />
               ) : (
                 <Link href="/login" className={loginButtonClasses}>
                   Přihlásit se
@@ -77,7 +76,9 @@ export default function NavbarClient({ user }) {
           </ul>
 
           <div className="flex items-center gap-4 lg:hidden">
-            {user && <ProfileDropdown user={user} scrolled={scrolled} />}
+            {user && (
+              <ProfileDropdown userData={userData} scrolled={scrolled} />
+            )}
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

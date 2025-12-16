@@ -1,21 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'i.imgur.com',
-                port: '',
-                pathname: '/**'
-            },
-            {
-                protocol: 'https',
-                hostname: 'cdn.simpleicons.org',
-                port: '',
-                pathname: '/**'
-            }
-        ]
-    }
+  images: {
+    remotePatterns: [
+      // {
+      //     protocol: 'https',
+      //     hostname: 'i.imgur.com',
+      //     port: '',
+      //     pathname: '/**'
+      // },
+      // {
+      //     protocol: 'https',
+      //     hostname: 'cdn.simpleicons.org',
+      //     port: '',
+      //     pathname: '/**'
+      // }
+      {
+        protocol: "https",
+        hostname: "yrrpusyjrzcaqqnydsuo.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
