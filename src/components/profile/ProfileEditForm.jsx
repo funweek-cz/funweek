@@ -1,9 +1,10 @@
 "use client";
-import { useState, useRef } from "react";
-import { clientSupabase } from "@/lib/supabase/client";
-import ThumbnailControls from "./ThumbnailControls";
 
-export default function ProfileEditForm({ initialProfile, onSave }) {
+import { useState, useRef, useTransition } from "react";
+import { updateProfile } from "@/app/dashboard/profile/actions";
+import ThumbnailControls from "@/components/profile/ThumbnailControls";
+
+export default function ProfileEditForm({ initialProfile, onUpdate }) {
   const departmentParts = initialProfile.department
     ? initialProfile.department.split(";#")
     : ["", "#000000"];
@@ -24,8 +25,9 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
       ? `#${departmentParts[1].replace("#", "")}`
       : "#000000",
   });
-  const [loading, setLoading] = useState(false);
-  const [, setError] = useState(null);
+
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState(null);
   const thumbnailInputRef = useRef(null);
 
   const isStaff = initialProfile.visible_staff;
@@ -38,61 +40,36 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
     }));
   };
 
-  const handleThumbnailUpload = (newUrl) => {
+  const handleThumbnailUpdate = (newUrl) => {
     setThumbnailUrl(newUrl);
-    onSave({ ...formData, thumbnail_image: newUrl });
-  };
-
-  const handleThumbnailRemove = () => {
-    setThumbnailUrl(null);
-    onSave({ ...formData, thumbnail_image: null });
+    onUpdate({ thumbnail_image: newUrl });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
-    try {
-      const updates = {
-        full_name: formData.full_name,
-        instagram: formData.instagram || null,
-        linkedin: formData.linkedin || null,
-        discord: formData.discord || null,
-        visible_email: formData.visible_email || null,
-        id: initialProfile.id,
-        visible_staff: isStaff,
-      };
+    const updates = {
+      full_name: formData.full_name,
+      instagram: formData.instagram || null,
+      linkedin: formData.linkedin || null,
+      discord: formData.discord || null,
+      visible_email: formData.visible_email || null,
+    };
 
-      if (isStaff) {
-        updates.thumbnail_image = thumbnailUrl || null;
-      }
-
-      const { error: updateError } = await clientSupabase
-        .from("profiles")
-        .update(updates)
-        .eq("id", initialProfile.id);
-
-      if (updateError) {
-        const msg = updateError.message || String(updateError);
-        console.error("Chyba při aktualizaci profilu:", msg);
-        setError("Nepodařilo se aktualizovat profil. " + msg);
-        setLoading(false);
-        return;
-      }
-
-      setFormData((prev) => ({
-        ...prev,
-        ...updates,
-      }));
-
-      onSave({ ...updates, thumbnail_image: thumbnailUrl || null });
-    } catch (updateError) {
-      console.error("Chyba při aktualizaci profilu:", updateError.message);
-      setError("Nepodařilo se aktualizovat profil. " + updateError.message);
-    } finally {
-      setLoading(false);
+    if (isStaff) {
+      updates.thumbnail_image = thumbnailUrl || null;
     }
+
+    startTransition(async () => {
+      const result = await updateProfile(updates);
+
+      if (result.error) {
+        setError("Nepodařilo se aktualizovat profil. " + result.error);
+      } else {
+        onUpdate(updates);
+      }
+    });
   };
 
   const inputClass =
@@ -103,6 +80,11 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
   return (
     <div className="mt-10 pt-6 border-t border-gray-200">
       <h2 className="text-3xl font-bold mb-6">Úprava profilu</h2>
+      {error && (
+        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          {error}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -232,10 +214,8 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
               </div>
 
               <ThumbnailControls
-                uid={initialProfile.id}
                 thumbnailUrl={thumbnailUrl}
-                onUpload={handleThumbnailUpload}
-                onRemove={handleThumbnailRemove}
+                onThumbnailUpdate={handleThumbnailUpdate}
                 fileInputRef={thumbnailInputRef}
               />
             </div>
@@ -245,13 +225,13 @@ export default function ProfileEditForm({ initialProfile, onSave }) {
         <button
           type="submit"
           className={`w-full py-3 mt-6 text-white font-semibold rounded-md transition-colors ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed cusror-not-allowed"
-              : "bg-funweek hover:bg-funweek/80  cursor-pointer"
+            isPending
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-funweek hover:bg-funweek/80 cursor-pointer"
           }`}
-          disabled={loading}
+          disabled={isPending}
         >
-          {loading ? "Ukládám..." : "Uložit změny profilu"}
+          {isPending ? "Ukládám..." : "Uložit změny profilu"}
         </button>
       </form>
     </div>
