@@ -10,25 +10,29 @@ const Navbar = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: userData, error } = await supabase
-    .from("profiles")
-    .select("avatar_url, full_name")
-    .eq("id", user.id)
-    .single();
+  if (user) {
+    const { data: userData, error } = await supabase
+      .from("profiles")
+      .select("avatar_url, full_name")
+      .eq("id", user.id)
+      .single();
 
-  if (error) throw error;
+    if (error) throw error;
 
-  if (userData?.avatar_url) {
-    if (!userData.avatar_url.startsWith("http")) {
-      const { data: urlData } = supabase.storage
-        .from("pfp")
-        .getPublicUrl(userData.avatar_url);
+    if (userData?.avatar_url) {
+      if (!userData.avatar_url.startsWith("http")) {
+        const { data: urlData } = supabase.storage
+          .from("pfp")
+          .getPublicUrl(userData.avatar_url);
 
-      userData.avatar_url = urlData.publicUrl;
+        userData.avatar_url = urlData.publicUrl;
+      }
     }
-  }
 
-  return <NavbarClient user={user} userData={userData} />;
+    return <NavbarClient user={user} userData={userData} />;
+  } else {
+    return <NavbarClient user={user} />;
+  }
 };
 
 export default Navbar;

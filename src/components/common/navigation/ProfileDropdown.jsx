@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { clientSupabase } from "@/lib/supabase/client";
+import { logout } from "@/components/common/navigation/actions";
 import { LuCircleUserRound } from "react-icons/lu";
 import Image from "next/image";
 
 export default function ProfileDropdown({ userData, scrolled }) {
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const initial = userData.full_name
@@ -31,9 +29,8 @@ export default function ProfileDropdown({ userData, scrolled }) {
   }, [isOpen]);
 
   const handleLogout = async () => {
-    await clientSupabase.auth.signOut();
-    router.push("/");
     setIsOpen(false);
+    await logout();
   };
 
   return (
