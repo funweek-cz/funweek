@@ -1,4 +1,5 @@
 import React from "react";
+import React from "react";
 
 import Link from "next/link";
 import { LuCookingPot } from "react-icons/lu";
