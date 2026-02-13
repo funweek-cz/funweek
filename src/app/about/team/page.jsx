@@ -75,7 +75,7 @@ export default async function TeamPage() {
       </div>
 
       <div
-        className={`${dataAvailable ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10" : "flex flex-col gap-2 px-8 py-24 bg-neutral-200/70 rounded-2xl"} justify-center items-center mt-10 w-full`}
+        className={`${dataAvailable ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" : "flex flex-col gap-2 px-8 py-24 bg-neutral-200/70 rounded-2xl"} justify-center items-center mt-10 w-full`}
       >
         {dataAvailable ? (
           data.map((member, index) => (

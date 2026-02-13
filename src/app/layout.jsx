@@ -1,4 +1,4 @@
-import { Gabarito } from "next/font/google";
+import { Gabarito, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/common/navigation/Navbar.server";
 import Footer from "@/components/Footer";
@@ -7,6 +7,14 @@ const gabarito = Gabarito({
   variable: "--font-gabarito",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -40,7 +48,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="cs">
-      <body className={`${gabarito.variable} antialiased`}>
+      <body
+        className={`${gabarito.variable} ${inter.variable} antialiased`}
+      >
         <Navbar />
         {children}
         <Footer />

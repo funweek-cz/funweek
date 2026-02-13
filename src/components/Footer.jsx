@@ -42,6 +42,8 @@ export default function Footer() {
                   alt={""}
                   src="https://cdn.simpleicons.org/instagram/FFFFFF"
                   width="17"
+                  height="17"
+                  unoptimized
                 />
                 <Link href="/about/project" className="">
                   Instagram
@@ -52,6 +54,8 @@ export default function Footer() {
                   alt={""}
                   src="https://cdn.simpleicons.org/tiktok/FFFFFF"
                   width="17"
+                  height="17"
+                  unoptimized
                 />
                 <Link href="/about/project" className="">
                   TikTok
@@ -76,6 +80,7 @@ export default function Footer() {
             alt="Logo"
             className="w-0 md:w-5"
             width="20"
+            height="20"
           />
         </Link>
         <div>

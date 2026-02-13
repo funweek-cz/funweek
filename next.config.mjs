@@ -2,18 +2,18 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      // {
-      //     protocol: 'https',
-      //     hostname: 'i.imgur.com',
-      //     port: '',
-      //     pathname: '/**'
-      // },
-      // {
-      //     protocol: 'https',
-      //     hostname: 'cdn.simpleicons.org',
-      //     port: '',
-      //     pathname: '/**'
-      // }
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.simpleicons.org',
+        port: "",
+        pathname: '/**'
+      },
       {
         protocol: "https",
         hostname: "yrrpusyjrzcaqqnydsuo.supabase.co",
