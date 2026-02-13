@@ -15,7 +15,7 @@ export default function VolunteersPage() {
     <main className="max-w-7xl px-5 sm:px-0 mx-auto mt-30 flex flex-col">
       <div className="flex flex-col justify-center items-center gap-2 py-10">
         <h1 className="text-center text-4xl mb-3 md:mb-0 md:text-5xl font-bold">
-          „Nečekejte na to, až se věci stanou, dělejte je.“
+          Nečekejte na to, až se věci stanou, dělejte je.
         </h1>
         <span className="text-center text-xl px-5">
           Hledáme lidi, co mají chuť přiložit ruku k dílu a být součástí týmu,

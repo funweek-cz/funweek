@@ -47,10 +47,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="cs">
-      <body
-        className={`${gabarito.variable} ${inter.variable} antialiased`}
-      >
+    <html lang="cs" className={`${gabarito.variable} ${inter.variable}`}>
+      <body className="antialiased">
         <Navbar />
         {children}
         <Footer />
