@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
-export async function sendOtpEmail(email) {
+export async function sendOtpEmail(email: string) {
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: email,
@@ -15,7 +15,7 @@ export async function sendOtpEmail(email) {
   return { success: true };
 }
 
-export async function verifyOtpCode(email, token) {
+export async function verifyOtpCode(email: string, token: string) {
   const supabase = await createClient();
   const { error } = await supabase.auth.verifyOtp({
     email: email,

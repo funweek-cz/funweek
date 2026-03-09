@@ -11,12 +11,20 @@ export default function AvatarSection({
   onAvatarClick,
   onAvatarUpdate,
   fileInputRef,
+}: {
+  avatarUrl: string | null;
+  displayInitial: string;
+  onAvatarClick: () => void;
+  onAvatarUpdate: (url: string | null) => void;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const [uploading, setUploading] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
@@ -32,12 +40,12 @@ export default function AvatarSection({
         if (result.error) {
           toast.error("Chyba při nahrávání avataru: " + result.error);
         } else {
-          onAvatarUpdate(result.avatarUrl);
+          onAvatarUpdate(result.avatarUrl as string | null);
           toast.success("Avatar byl úspěšně nahrán!");
         }
         setUploading(false);
       });
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Chyba při nahrávání avataru: " + error.message);
       setUploading(false);
     }
@@ -60,7 +68,7 @@ export default function AvatarSection({
         }
         setUploading(false);
       });
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Chyba při odstraňování avataru: " + error.message);
       setUploading(false);
     }

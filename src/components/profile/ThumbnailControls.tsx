@@ -21,8 +21,8 @@ export default function ThumbnailControls({
   const [removing, setRemoving] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const handleUpload = async (event) => {
-    const file = event.target.files[0];
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
@@ -38,16 +38,16 @@ export default function ThumbnailControls({
         if (result.error) {
           console.error("Chyba při nahrávání thumbnailu:", result.error);
         } else {
-          onThumbnailUpdate(result.thumbnailUrl);
+          onThumbnailUpdate(result.thumbnailUrl as string | null);
         }
 
         setUploading(false);
 
         if (fileInputRef.current) {
-          fileInputRef.current.value = null;
+          fileInputRef.current.value = "";
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Chyba při nahrávání thumbnailu:", error.message);
       setUploading(false);
     }
@@ -70,7 +70,7 @@ export default function ThumbnailControls({
 
         setRemoving(false);
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Chyba při odstraňování thumbnailu:", error.message);
       setRemoving(false);
     }
@@ -116,7 +116,7 @@ export default function ThumbnailControls({
       <div className="flex space-x-2">
         <button
           type="button"
-          onClick={() => fileInputRef.current.click()}
+          onClick={() => fileInputRef.current?.click()}
           className={`flex items-center justify-center px-4 py-2 text-sm font-medium rounded-md transition-colors border ${
             isDisabled
               ? "bg-gray-200 text-gray-500 cursor-not-allowed"

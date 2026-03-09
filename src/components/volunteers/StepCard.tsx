@@ -17,7 +17,7 @@ export default function StepCard({
   children: React.ReactNode;
   isFinal?: boolean;
 }) {
-  const Icon = icons[icon];
+  const Icon = icons[icon as keyof typeof icons];
   const cardClasses = `flex-1 rounded-2xl p-8 relative overflow-hidden ${
     isFinal ? "bg-funweek text-white" : "bg-gray-100"
   }`;

@@ -17,7 +17,7 @@ export default function LoginPageClient() {
   const [error, setError] = useState("");
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
-  const handleEmailSubmit = async (e) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
@@ -34,7 +34,7 @@ export default function LoginPageClient() {
     }
   };
 
-  const handleCodeChange = (index, value) => {
+  const handleCodeChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return;
 
     const newCode = [...code];
@@ -46,13 +46,13 @@ export default function LoginPageClient() {
     }
   };
 
-  const handleCodeKeyDown = (index, e) => {
+  const handleCodeKeyDown = (index: number, e: React.KeyboardEvent) => {
     if (e.key === "Backspace" && !code[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
-  const handlePaste = (e) => {
+  const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text");
     if (pastedData.length === 6 && /^\d+$/.test(pastedData)) {
@@ -62,7 +62,7 @@ export default function LoginPageClient() {
     }
   };
 
-  const handleCodeSubmit = async (e) => {
+  const handleCodeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");

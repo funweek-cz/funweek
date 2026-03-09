@@ -3,7 +3,7 @@ import MemberCard from "@/components/team/MemberCard";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
-const parseDepartment = (departmentString) => {
+const parseDepartment = (departmentString: string | null) => {
   if (!departmentString) {
     return { name: "Neznámé", color: "#808080" };
   }
@@ -13,7 +13,7 @@ const parseDepartment = (departmentString) => {
   return { name, color };
 };
 
-const parseTag = (tagString) => {
+const parseTag = (tagString: string | null) => {
   if (!tagString) {
     return null;
   }
@@ -21,8 +21,8 @@ const parseTag = (tagString) => {
   const emoji = parts[0];
   const text = parts[1];
   const color = parts[2] ? `#${parts[2].replace("#", "")}` : "#808080";
-  return { emoji, text, color }
-}
+  return { emoji, text, color };
+};
 
 const getTeamData = async () => {
   const supabase = await createClient();
@@ -37,7 +37,7 @@ const getTeamData = async () => {
     .order("priority", { ascending: true, nullsFirst: false })
     .order("role", { ascending: true });
 
-  const result = data.map((profile) => {
+  const result = (data || []).map((profile) => {
     const { name: depName, color: depColor } = parseDepartment(
       profile.department,
     );
@@ -53,22 +53,21 @@ const getTeamData = async () => {
       "/assets/images/content/team-member-thumbnail-unavailable.webp";
 
     if (profile.tag != null) {
-      const {
-        emoji: tagEmoji,
-        text: tagText,
-        color: tagColor,
-      } = parseTag(profile.tag);
-      return {
-        name: profile.full_name,
-        role: profile.role,
-        department: depName,
-        depColor,
-        image: finalImageUrl,
-        socials,
-        tagEmoji,
-        tagText,
-        tagColor,
-      };
+      const parsedTag = parseTag(profile.tag);
+      if (parsedTag) {
+        const { emoji: tagEmoji, text: tagText, color: tagColor } = parsedTag;
+        return {
+          name: profile.full_name,
+          role: profile.role,
+          department: depName,
+          depColor,
+          image: finalImageUrl,
+          socials,
+          tagEmoji,
+          tagText,
+          tagColor,
+        };
+      }
     }
 
     return {

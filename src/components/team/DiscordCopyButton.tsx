@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { SiDiscord } from "react-icons/si";
 
-const DiscordCopyButton = ({ nickname }) => {
+const DiscordCopyButton = ({ nickname }: { nickname: string }) => {
   const [copied, setCopied] = useState(false);
 
   if (!nickname) return null;

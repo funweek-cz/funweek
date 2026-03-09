@@ -1,4 +1,14 @@
-export default function TeamCard({ icon, title, desc }) {
+import React from "react";
+
+export default function TeamCard({
+  icon,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
   return (
     <div className="rounded-2xl p-6 bg-gray-100">
       <div className="text-funweek mb-3 transition-transform duration-300 w-fit">
