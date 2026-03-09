@@ -8,6 +8,7 @@ Vítejte v repozitáři **Funweek Web**! Tento dokument slouží jako přehled d
 
 * **Supabase** – Backend-as-a-Service (auth, databáze, API).
 * **Next.js** – hlavní framework pro frontend i server-side logiku.
+* **TypeScript** - Type-safety
 * **React** – základní UI knihovna.
 * **Tailwind CSS v4** – pro rychlé a efektivní stylování.
 * **PNPM** – správce balíčků.
@@ -74,10 +75,6 @@ Oficiální specifikace: [https://www.conventionalcommits.org/](https://www.conv
 ---
 
 ## 📂 Struktura projektu
-
-### ❗ Poznámka k TypeScriptu
-
-V projektu **nepoužíváme TypeScript**, pouze čistý JavaScript.
 
 ## 📂 Struktura projektu (doporučený přehled)
 
