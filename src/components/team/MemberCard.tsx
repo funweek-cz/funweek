@@ -27,7 +27,7 @@ const MemberCard = ({
 }) => {
   return (
     <article
-      className="flex p-3 bg-cover flex-col w-full items-center gap-2 border-funweek rounded-xl aspect-[2/3] justify-end"
+      className="flex p-3 bg-cover flex-col w-full items-center gap-2 border-funweek rounded-xl aspect-2/3 justify-end"
       style={{ backgroundImage: `url('${member.image}')` }}
     >
       <div className="flex flex-row items-center gap-1">
