@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="px-5 mt-10">
+    <footer className="px-5 md:px-10 mt-10">
       <div className="max-w-7xl mx-auto py-10 px-10 bg-funweek text-white rounded-2xl">
         <div className="justify-between items-top w-full flex flex-col gap-5 md:gap-0 md:flex-row">
           <div className="flex flex-col items-top">
@@ -85,7 +85,7 @@ export default function Footer() {
         </Link>
         <div>
           <p className="text-sm text-funweek">
-            © 2025 Funweek - Všechna práva vyhrazena
+            © 2026 Funweek - Všechna práva vyhrazena
           </p>
         </div>
       </div>

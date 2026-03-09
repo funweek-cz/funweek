@@ -11,7 +11,7 @@ const NavbarItemSingleMobile = ({
       <Link
         href={link}
         onClick={onClick}
-        className="block py-2 font-bold hover:bg-white/10 rounded-lg px-4 transition-colors"
+        className="block py-2 font-bold hover:bg-white/10 rounded-lg px-4 transition-colors pointer-events-auto"
       >
         {label}
       </Link>

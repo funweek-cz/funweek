@@ -52,6 +52,16 @@ export default function LoginPageClient() {
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData("text");
+    if (pastedData.length === 6 && /^\d+$/.test(pastedData)) {
+      const newCode = pastedData.split("");
+      setCode(newCode);
+      inputRefs.current[5]?.focus();
+    }
+  };
+
   const handleCodeSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -161,7 +171,10 @@ export default function LoginPageClient() {
               </div>
               <form onSubmit={handleCodeSubmit} className="space-y-6">
                 <div>
-                  <div className="flex gap-2 justify-center">
+                  <div
+                    className="flex gap-2 justify-center"
+                    onPaste={handlePaste}
+                  >
                     {code.map((c, i) => (
                       <input
                         key={i}
@@ -175,6 +188,7 @@ export default function LoginPageClient() {
                         onKeyDown={(e) => handleCodeKeyDown(i, e)}
                         className="w-10 h-14 text-center text-xl font-bold border-2 border-gray-300 rounded-lg outline-none transition-all duration-200 focus:border-funweek"
                         disabled={isLoading}
+                        autoComplete={i === 0 ? "one-time-code" : "off"}
                       />
                     ))}
                   </div>

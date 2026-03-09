@@ -13,13 +13,24 @@ const parseDepartment = (departmentString) => {
   return { name, color };
 };
 
+const parseTag = (tagString) => {
+  if (!tagString) {
+    return null;
+  }
+  const parts = tagString.split(";");
+  const emoji = parts[0];
+  const text = parts[1];
+  const color = parts[2] ? `#${parts[2].replace("#", "")}` : "#808080";
+  return { emoji, text, color }
+}
+
 const getTeamData = async () => {
   const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("profiles")
     .select(
-      "full_name, role, department, thumbnail_image, instagram, linkedin, discord, visible_email, priority",
+      "full_name, role, department, thumbnail_image, tag, instagram, linkedin, discord, visible_email, priority",
     )
     .eq("visible_staff", true)
     .not("role", "is", null)
@@ -41,6 +52,25 @@ const getTeamData = async () => {
       profile.thumbnail_image ||
       "/assets/images/content/team-member-thumbnail-unavailable.webp";
 
+    if (profile.tag != null) {
+      const {
+        emoji: tagEmoji,
+        text: tagText,
+        color: tagColor,
+      } = parseTag(profile.tag);
+      return {
+        name: profile.full_name,
+        role: profile.role,
+        department: depName,
+        depColor,
+        image: finalImageUrl,
+        socials,
+        tagEmoji,
+        tagText,
+        tagColor,
+      };
+    }
+
     return {
       name: profile.full_name,
       role: profile.role,
@@ -48,7 +78,6 @@ const getTeamData = async () => {
       depColor,
       image: finalImageUrl,
       socials,
-      availability: null,
     };
   });
 
@@ -61,9 +90,9 @@ export default async function TeamPage() {
   const dataAvailable = !error && data && data.length > 0;
 
   return (
-    <main className="w-full px-10 md:px-50 mt-30 flex flex-col justify-center items-center">
-      <div className="flex flex-col justify-center items-center gap-2">
-        <h1 className="text-center text-4xl mb-3 md:mb-0 md:text-5xl font-bold md:leading-15">
+    <main className="max-w-7xl px-5 md:px-30 mx-auto mt-30 flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center gap-5">
+        <h1 className="text-center text-5xl mb-3 md:mb-0 md:text-6xl font-bold md:leading-15">
           Spojuje nás vize světa, kde se každý cítí být rovnocenný a přijatý.
         </h1>
         <span className="text-center text-xl px-5 md:px-25">

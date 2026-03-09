@@ -37,21 +37,22 @@ export default function NavbarClient({ user, userData }) {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
-          scrolled
-            ? "m-4 px-8 py-4 bg-funweek/80 text-white backdrop-blur rounded-2xl border border-white/20 shadow-2xl"
-            : "px-8 py-6 text-funweek"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Logo isWhite={scrolled} />
+      <div className="fixed top-0 left-0 right-0 z-40 flex justify-center px-5 md:px-10">
+        <nav
+          className={`pointer-events-auto w-full max-w-7xl transition-all duration-300 ease-out mt-2 rounded-2xl ${
+            scrolled
+              ? "md:px-8 px-4 py-4 bg-funweek/80 text-white backdrop-blur border border-white/20 shadow-2xl"
+              : "py-6 text-funweek"
+          }`}
+        >
+          <div className="flex justify-between items-center w-full">
+            <Logo isWhite={scrolled} />
 
           <ul className="hidden lg:flex gap-8 list-none items-center">
             <NavbarItemSingle
               scrolled={scrolled}
               link={"/volunteers"}
-              label={"Dobrovolnictvo"}
+              label={"Dobrovolnictví"}
             />
             <NavbarItemMulti
               scrolled={scrolled}
@@ -92,8 +93,10 @@ export default function NavbarClient({ user, userData }) {
       </nav>
 
       <div
-        className={`fixed top-0 left-0 h-full w-full z-50 transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 left-0 h-full w-full transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen
+            ? "translate-x-0 z-50 opacity-100"
+            : "translate-x-full z-0 opacity-0"
         } bg-funweek/95 backdrop-blur-lg lg:hidden p-8 text-white flex flex-col space-y-4`}
       >
         <button
@@ -110,7 +113,7 @@ export default function NavbarClient({ user, userData }) {
               <Link
                 href="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 font-bold hover:bg-white/50 bg-white text-funweek rounded-lg px-4 transition-colors"
+                className="block py-3 font-bold hover:bg-white/50 bg-white text-funweek rounded-lg px-4 transition-colors"
               >
                 Přihlásit se
               </Link>
@@ -118,12 +121,12 @@ export default function NavbarClient({ user, userData }) {
           </li>
           <NavbarItemSingleMobile
             link={"/volunteers"}
-            label={"Dobrovolnictvo"}
+            label={"Dobrovolnictví"}
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           <NavbarItemMultiMobile
-            closeMenuFunction={() => setIsDropdownOpen(!isDropdownOpen)}
+            closeMenuFunction={() => setIsMobileMenuOpen(false)}
             label={"O projektu"}
             links={aboutDropdownLinks}
           />
@@ -134,6 +137,7 @@ export default function NavbarClient({ user, userData }) {
             onClick={() => setIsMobileMenuOpen(false)}
           />
         </ul>
+      </div>
       </div>
     </>
   );

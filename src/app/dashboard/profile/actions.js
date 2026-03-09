@@ -112,6 +112,7 @@ export async function uploadAvatar(formData) {
       }
     } catch (e) {
       // Ignorujeme chyby při mazání starého avataru
+      return { error: e.message }
     }
   }
 
