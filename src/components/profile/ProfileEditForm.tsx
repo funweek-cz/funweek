@@ -4,7 +4,13 @@ import { useState, useRef, useTransition } from "react";
 import { updateProfile } from "@/app/dashboard/profile/actions";
 import ThumbnailControls from "@/components/profile/ThumbnailControls";
 
-export default function ProfileEditForm({ initialProfile, onUpdate }) {
+export default function ProfileEditForm({
+  initialProfile,
+  onUpdate,
+}: {
+  initialProfile: any;
+  onUpdate: (data: any) => void;
+}) {
   const departmentParts = initialProfile.department
     ? initialProfile.department.split(";#")
     : ["", "#000000"];
@@ -27,12 +33,12 @@ export default function ProfileEditForm({ initialProfile, onUpdate }) {
   });
 
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const thumbnailInputRef = useRef(null);
 
   const isStaff = initialProfile.visible_staff;
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -40,16 +46,16 @@ export default function ProfileEditForm({ initialProfile, onUpdate }) {
     }));
   };
 
-  const handleThumbnailUpdate = (newUrl) => {
+  const handleThumbnailUpdate = (newUrl: string | null) => {
     setThumbnailUrl(newUrl);
     onUpdate({ thumbnail_image: newUrl });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    const updates = {
+    const updates: Record<string, any> = {
       full_name: formData.full_name,
       instagram: formData.instagram || null,
       linkedin: formData.linkedin || null,

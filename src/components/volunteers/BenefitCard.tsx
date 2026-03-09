@@ -7,7 +7,15 @@ const icons = {
   Zap,
 };
 
-export default function BenefitCard({ icon, title, children }) {
+export default function BenefitCard({
+  icon,
+  title,
+  children,
+}: {
+  icon: keyof typeof icons;
+  title: string;
+  children: React.ReactNode;
+}) {
   const Icon = icons[icon];
   return (
     <div className="text-funweek rounded-2xl p-8 flex flex-col gap-4 bg-gray-100">

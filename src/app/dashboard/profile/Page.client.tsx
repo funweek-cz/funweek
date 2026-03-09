@@ -4,16 +4,20 @@ import { useState, useRef } from "react";
 import AvatarSection from "@/components/profile/AvatarSection";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 
-export default function ProfileClient({ initialProfile }) {
+export default function ProfileClient({
+  initialProfile,
+}: {
+  initialProfile: any;
+}) {
   const [profile, setProfile] = useState(initialProfile);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleAvatarUpdate = (newAvatarUrl) => {
-    setProfile((prev) => ({ ...prev, avatar_url: newAvatarUrl }));
+  const handleAvatarUpdate = (newAvatarUrl: string | null) => {
+    setProfile((prev: any) => ({ ...prev, avatar_url: newAvatarUrl }));
   };
 
-  const handleProfileUpdate = (updatedFields) => {
-    setProfile((prev) => ({ ...prev, ...updatedFields }));
+  const handleProfileUpdate = (updatedFields: any) => {
+    setProfile((prev: any) => ({ ...prev, ...updatedFields }));
   };
 
   const handleAvatarClick = () => {

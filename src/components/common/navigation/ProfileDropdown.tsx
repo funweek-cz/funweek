@@ -6,7 +6,13 @@ import { logout } from "@/components/common/navigation/actions";
 import { LuCircleUserRound } from "react-icons/lu";
 import Image from "next/image";
 
-export default function ProfileDropdown({ userData, scrolled }) {
+export default function ProfileDropdown({
+  userData,
+  scrolled,
+}: {
+  userData: any;
+  scrolled: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const initial = userData.full_name
@@ -14,11 +20,12 @@ export default function ProfileDropdown({ userData, scrolled }) {
     : "?";
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = (event: MouseEvent) => {
       if (
         isOpen &&
         window.innerWidth < 1024 &&
-        event.target.closest(".profile-dropdown-container") === null
+        (event.target as Element).closest(".profile-dropdown-container") ===
+          null
       ) {
         setIsOpen(false);
       }

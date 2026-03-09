@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
-function generateRandomString(length) {
+function generateRandomString(length: number) {
   let result = "";
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -14,7 +14,7 @@ function generateRandomString(length) {
   return result;
 }
 
-export async function updateProfile(formData) {
+export async function updateProfile(formData: Record<string, any>) {
   const supabase = await createClient();
 
   const {
@@ -26,7 +26,7 @@ export async function updateProfile(formData) {
     return { error: "Uživatel není přihlášen" };
   }
 
-  const updates = {
+  const updates: Record<string, any> = {
     full_name: formData.full_name,
     instagram: formData.instagram || null,
     linkedin: formData.linkedin || null,
@@ -51,7 +51,7 @@ export async function updateProfile(formData) {
   return { success: true };
 }
 
-export async function uploadAvatar(formData) {
+export async function uploadAvatar(formData: FormData) {
   const supabase = await createClient();
 
   const {
@@ -63,8 +63,8 @@ export async function uploadAvatar(formData) {
     return { error: "Uživatel není přihlášen" };
   }
 
-  const file = formData.get("file");
-  const oldAvatarUrl = formData.get("oldAvatarUrl");
+  const file = formData.get("file") as File;
+  const oldAvatarUrl = formData.get("oldAvatarUrl") as string;
 
   if (!file) {
     return { error: "Žádný soubor nebyl nahrán" };
@@ -110,9 +110,9 @@ export async function uploadAvatar(formData) {
       if (oldFileName && oldFileName.length > 0) {
         await supabase.storage.from("avatars").remove([oldFileName]);
       }
-    } catch (e) {
+    } catch (e: any) {
       // Ignorujeme chyby při mazání starého avataru
-      return { error: e.message }
+      return { error: e.message };
     }
   }
 
@@ -164,7 +164,7 @@ export async function removeAvatar() {
   return { success: true };
 }
 
-export async function uploadThumbnail(formData) {
+export async function uploadThumbnail(formData: FormData) {
   const supabase = await createClient();
 
   const {
@@ -176,8 +176,8 @@ export async function uploadThumbnail(formData) {
     return { error: "Uživatel není přihlášen" };
   }
 
-  const file = formData.get("file");
-  const oldThumbnailUrl = formData.get("oldThumbnailUrl");
+  const file = formData.get("file") as File;
+  const oldThumbnailUrl = formData.get("oldThumbnailUrl") as string;
 
   if (!file) {
     return { error: "Žádný soubor nebyl nahrán" };
