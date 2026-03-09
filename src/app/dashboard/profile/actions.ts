@@ -26,7 +26,7 @@ export async function updateProfile(formData) {
     return { error: "Uživatel není přihlášen" };
   }
 
-  const updates = {
+  const updates: Record<string, any> = {
     full_name: formData.full_name,
     instagram: formData.instagram || null,
     linkedin: formData.linkedin || null,
@@ -112,7 +112,7 @@ export async function uploadAvatar(formData) {
       }
     } catch (e) {
       // Ignorujeme chyby při mazání starého avataru
-      return { error: e.message }
+      return { error: e.message };
     }
   }
 

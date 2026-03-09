@@ -87,7 +87,7 @@ export default function ProjectPage() {
                 <textarea
                   id="message"
                   required
-                  rows="4"
+                  rows={4}
                   placeholder="O co se jedná..."
                   className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all resize-none"
                 />

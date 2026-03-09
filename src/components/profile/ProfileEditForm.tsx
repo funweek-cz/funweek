@@ -49,7 +49,7 @@ export default function ProfileEditForm({ initialProfile, onUpdate }) {
     e.preventDefault();
     setError(null);
 
-    const updates = {
+    const updates: Record<string, any> = {
       full_name: formData.full_name,
       instagram: formData.instagram || null,
       linkedin: formData.linkedin || null,

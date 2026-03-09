@@ -15,7 +15,7 @@ export default function LoginPageClient() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const inputRefs = useRef([]);
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -179,7 +179,9 @@ export default function LoginPageClient() {
                       <input
                         key={i}
                         id={`code-${i}`}
-                        ref={(el) => (inputRefs.current[i] = el)}
+                        ref={(el) => {
+                          inputRefs.current[i] = el;
+                        }}
                         type="text"
                         inputMode="numeric"
                         maxLength={1}

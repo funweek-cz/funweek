@@ -12,6 +12,10 @@ export default function ThumbnailControls({
   thumbnailUrl,
   onThumbnailUpdate,
   fileInputRef,
+}: {
+  thumbnailUrl: string | null;
+  onThumbnailUpdate: (url: string | null) => void;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
@@ -89,7 +93,7 @@ export default function ThumbnailControls({
         disabled={isDisabled}
       />
 
-      <div className="w-20 h-30 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100 border border-gray-300 flex-shrink-0">
+      <div className="w-20 h-30 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100 border border-gray-300 shrink-0">
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
@@ -98,8 +102,9 @@ export default function ThumbnailControls({
             height={120}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.target.onerror = null;
-              e.target.src =
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src =
                 "https://placehold.co/80x120/cccccc/333333?text=Thumb+Err";
             }}
           />
