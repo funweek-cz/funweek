@@ -44,7 +44,7 @@ export default function ProfileClient({
           fileInputRef={fileInputRef}
         />
 
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-semibold">
           Ahoj{displayName ? ", " : ""}
           {displayName}!
         </h1>

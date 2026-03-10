@@ -8,6 +8,9 @@ import {
   LuMail,
 } from "react-icons/lu";
 import { sendOtpEmail, verifyOtpCode } from "./actions";
+import Image from "next/image";
+import Link from "next/link";
+import Logo from "@/components/common/Logo";
 
 export default function LoginPageClient() {
   const [email, setEmail] = useState("");
@@ -102,11 +105,21 @@ export default function LoginPageClient() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <main className="w-full max-w-md bg-white rounded-2xl border overflow-hidden">
-        <div className="p-6 sm:p-8">
+        <div className="p-6 sm:p-8 space-y-6">
+          <div className="w-full flex justify-center">
+            <Image
+              src="/logo-green.svg"
+              alt="Logo"
+              className="w-12"
+              width="20"
+              height="20"
+            />
+          </div>
+
           {step === 1 && (
             <div className="space-y-6">
               <div className="text-center">
-                <h1 className="text-3xl font-extrabold text-funweek">
+                <h1 className="text-3xl font-semibold text-funweek">
                   Vítej zpátky!
                 </h1>
                 <p className="text-funweek/80 mt-2 text-md">
@@ -128,7 +141,7 @@ export default function LoginPageClient() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border-2 border-funweek/30 focus:border-funweek focus:ring-1 focus:ring-funweek rounded-xl transition-all shadow-sm"
+                      className="w-full pl-10 pr-4 py-3 border-2 border-funweek/30 focus:border-funweek focus:ring-1 focus:ring-funweek rounded-xl transition-all"
                       placeholder="jmeno@domena.cz"
                       disabled={isLoading}
                     />
@@ -142,7 +155,7 @@ export default function LoginPageClient() {
                 <button
                   type="submit"
                   disabled={isLoading || !email}
-                  className="w-full font-bold bg-funweek text-white py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-funweek/40"
+                  className="w-full font-bold bg-funweek text-white py-3 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white border-funweek border cursor-pointer hover:text-funweek"
                 >
                   {isLoading ? (
                     <LuLoaderCircle className="animate-spin" size={20} />
@@ -159,7 +172,7 @@ export default function LoginPageClient() {
           {step === 2 && (
             <div className="space-y-6">
               <div className="text-center">
-                <h1 className="text-3xl font-extrabold text-funweek">
+                <h1 className="text-3xl font-semibold text-funweek">
                   Poslali jsme ti kód!
                 </h1>
                 <p className="text-funweek/80 mt-2 text-md">
@@ -208,7 +221,7 @@ export default function LoginPageClient() {
                       setCode(["", "", "", "", "", ""]);
                       setError("");
                     }}
-                    className="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-all duration-300 hover:bg-gray-200 flex items-center justify-center gap-2"
+                    className="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-all duration-300 hover:bg-gray-200 flex items-center justify-center gap-2 cursor-pointer"
                     disabled={isLoading}
                   >
                     <LuArrowLeft size={20} /> Zpět
@@ -216,7 +229,7 @@ export default function LoginPageClient() {
                   <button
                     type="submit"
                     disabled={isLoading || code.some((c) => !c)}
-                    className="flex-1 bg-funweek text-white py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-funweek/40"
+                    className="flex-1 bg-funweek text-white py-3 rounded-xl font-bold transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:bg-white hover:text-funweek border border-funweek"
                   >
                     {isLoading ? (
                       <LuLoaderCircle className="animate-spin" size={20} />
