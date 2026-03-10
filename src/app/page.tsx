@@ -32,7 +32,7 @@ export default function Home() {
               delay={0.3}
             />
             <Card
-              href="/"
+              href="/contact"
               title="Kontakt"
               description="Máte dotazy? Ozvěte se autorům projektu."
               delay={0.4}
