@@ -89,7 +89,7 @@ export default function VolunteersPage() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-20 md:mt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-10 text-funweek">
+        <h1 className="text-3xl md:text-4xl font-semibold mb-10 text-funweek">
           Proč do toho jít s námi?
         </h1>
 
@@ -113,7 +113,7 @@ export default function VolunteersPage() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-20 md:mt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-10 text-funweek">
+        <h1 className="text-3xl md:text-4xl font-semibold mb-10 text-funweek">
           Jak se k nám přidat?
         </h1>
         <div className="flex flex-col md:flex-row gap-5">
@@ -130,7 +130,7 @@ export default function VolunteersPage() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-20 md:mt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-10 text-funweek">
+        <h1 className="text-3xl md:text-4xl font-semibold mb-10 text-funweek">
           Kde můžeš pomoci?
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -147,7 +147,7 @@ export default function VolunteersPage() {
       <div className="max-w-7xl mx-auto mt-20 p-8 md:p-12 bg-gray-50 rounded-2xl border border-gray-200">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">
+            <h1 className="text-2xl md:text-3xl font-semibold mb-4">
               Co za to pro tebe máme?
             </h1>
             <BenefitList />

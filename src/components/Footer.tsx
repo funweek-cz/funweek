@@ -74,7 +74,7 @@ export default function Footer() {
             Podmínky používání
           </Link>
         </div>
-        <Link href="/" className="hover:scale-95 transition-all">
+        <Link href="/" className="hover:rotate-90 transition-transform">
           <Image
             src="/logo-green.svg"
             alt="Logo"

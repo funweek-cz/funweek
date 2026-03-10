@@ -3,7 +3,7 @@ import Link from "next/link";
 const Logo = ({ isWhite = false }) => (
   <Link
     href="/"
-    className={`text-2xl font-bold ${isWhite ? "text-white" : "text-funweek"} hover:scale-95 transition-transform flex gap-2`}
+    className={`text-2xl font-semibold ${isWhite ? "text-white" : "text-funweek"} transition-transform group flex gap-2`}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ const Logo = ({ isWhite = false }) => (
       width="40"
       height="40"
       fill="currentColor"
-      className="transition-colors duration-300"
+      className="transition-all group-hover:rotate-90 duration-300"
     >
       <path
         d="M213 132.55C168.569 132.55 132.55 168.569 132.55 213H106.5C106.5 154.182 154.182 106.5 213 106.5V132.55Z"
