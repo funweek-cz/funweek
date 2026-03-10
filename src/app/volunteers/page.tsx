@@ -58,12 +58,14 @@ export default function VolunteersPage() {
     <main className="w-full px-5 mb-20">
       <div className="max-w-7xl mx-auto mt-35 md:mt-23">
         <div className="relative rounded-3xl overflow-hidden min-h-[70vh] flex flex-col justify-center items-center text-center md:p-20 isolate">
-          <h1 className="text-5xl md:text-7xl font-bold text-funweek mb-6">
+          <h1 className="text-5xl md:text-7xl font-semibold text-funweek mb-6">
             Nečekejte, až se věci stanou. Dělejte je.
           </h1>
 
           <p className="text-xl text-funweek max-w-2xl mb-10 leading-relaxed">
-            Staň se dobrovolníkem na Funweeku! Nejenom, že nabereš nové zkušenosti a získáš užitečný certifikát, ale také zažiješ spoustu zábavy a budeš mít naprosto jedinečný zážitek.
+            Staň se dobrovolníkem na Funweeku! Nejenom, že nabereš nové
+            zkušenosti a získáš užitečný certifikát, ale také zažiješ spoustu
+            zábavy a budeš mít naprosto jedinečný zážitek.
           </p>
 
           <div className="flex flex-col items-center sm:flex-row gap-4 w-full justify-center">
@@ -78,7 +80,7 @@ export default function VolunteersPage() {
               />
             </Link>
             <Link
-              href="/"
+              href="https://www.notion.so/Detailn-informace-k-dobrovolnictv-2bca3596c03c80bcae71c955d14b8c4b?source=copy_link"
               className="bg-transparent hover:bg-funweek hover:text-white border-funweek border text-funweek px-8 py-4 rounded-xl w-fit font-bold transition-all flex items-center justify-center gap-2"
             >
               Detailní dokument s informacemi <FileText size={20} />

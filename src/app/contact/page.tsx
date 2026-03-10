@@ -9,11 +9,11 @@ export default function ProjectPage() {
       {" "}
       <div className="max-w-7xl mx-auto">
         <div className="py-5 flex flex-col items-center justify-center gap-2">
-          <h1 className="text-5xl md:text-7xl font-bold text-funweek text-center">
+          <h1 className="text-5xl md:text-7xl font-semibold text-funweek text-center">
             Spojte se s námi.
           </h1>
-          <p className="text-xl text-funweek max-w-2xl mb-10 leading-relaxed text-center">
-            V případě potřeby nás neváhejte kontaktovat pomocí formuláře níže.
+          <p className="text-xl text-funweek max-w-3xl mb-10 leading-relaxed text-center">
+            Něco vám vrtá hlavou? Ozvěte se nám prostřednictvím kontaktního formuláře níže. Odpovídáme obratem.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function ProjectPage() {
                   id="message"
                   required
                   rows={4}
-                  placeholder="O co se jedná..."
+                  placeholder="Vaše dotazy, nápady nebo vzkazy..."
                   className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all resize-none"
                 />
               </div>

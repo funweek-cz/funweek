@@ -25,8 +25,8 @@ export default function ProjectPage() {
   return (
     <main className="w-full px-5 md:px-10 mb-20">
       <div className="max-w-7xl mx-auto mt-23">
-        <div className="relative rounded-3xl overflow-hidden min-h-[70vh] flex flex-col justify-center items-center text-center p-5 md:p-20 isolate">
-          <h1 className="text-5xl md:text-7xl font-bold text-funweek mb-6">
+        <div className="relative rounded-3xl overflow-hidden min-h-[70vh] flex flex-col justify-center items-center text-center md:p-20 isolate">
+          <h1 className="text-5xl md:text-7xl font-semibold text-funweek mb-6">
             Věříme, že talent se skrývá v každé školní lavici.
           </h1>
 
@@ -36,10 +36,10 @@ export default function ProjectPage() {
             známkách.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
             <Link
               href="https://www.notion.so/Konceptu-ln-z-m-r-projektu-2ada3596c03c8089aa05f3a90b9cf4f5?source=copy_link"
-              className="bg-funweek text-white px-8 py-4 rounded-xl font-bold hover:bg-transparent hover:text-funweek border-funweek border transition-all flex items-center justify-center gap-2 group"
+              className="bg-funweek w-fit text-white px-8 py-4 rounded-xl font-bold hover:bg-transparent hover:text-funweek border-funweek border transition-all flex items-center justify-center gap-2 group"
             >
               Konceptuální záměr projektu <FileText size={20} />
             </Link>

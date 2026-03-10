@@ -91,7 +91,7 @@ export default async function TeamPage() {
   return (
     <main className="max-w-7xl px-5 md:px-30 mx-auto mt-30 flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-5">
-        <h1 className="text-center text-5xl mb-3 md:mb-0 md:text-6xl font-bold md:leading-15">
+        <h1 className="text-center text-5xl mb-3 md:mb-0 md:text-6xl font-semibold md:leading-15">
           Spojuje nás vize světa, kde se každý cítí být rovnocenný a přijatý.
         </h1>
         <span className="text-center text-xl px-5 md:px-25">

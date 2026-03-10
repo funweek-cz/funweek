@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 
 const gabarito = Gabarito({
   variable: "--font-gabarito",
-  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
