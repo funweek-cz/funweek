@@ -78,7 +78,7 @@ export default function Footer() {
           <Image
             src="/logo-green.svg"
             alt="Logo"
-            className="w-0 md:w-5"
+            className="w-0 md:w-6"
             width="20"
             height="20"
           />

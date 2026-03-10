@@ -9,6 +9,7 @@ import NavbarItemMulti from "@/components/common/navigation/NavbarItemMulti";
 import { LuMenu, LuX } from "react-icons/lu";
 import NavbarItemSingleMobile from "@/components/common/navigation/NavbarItemSingleMobile";
 import NavbarItemMultiMobile from "@/components/common/navigation/NavbarItemMultiMobile";
+import { motion } from "framer-motion";
 
 export default function NavbarClient({
   user,
@@ -44,45 +45,104 @@ export default function NavbarClient({
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-40 flex justify-center px-5 md:px-10">
-        <nav
+        <motion.nav
           className={`pointer-events-auto w-full max-w-7xl transition-all duration-300 ease-out mt-2 rounded-2xl ${
             scrolled
               ? "md:px-8 px-4 py-4 bg-funweek/80 text-white backdrop-blur border border-white/20 shadow-2xl"
               : "py-6 text-funweek"
           }`}
+          initial="hidden"
+          animate="show"
+          variants={{
+            show: { transition: { staggerChildren: 0.1 } },
+          }}
         >
           <div className="flex justify-between items-center w-full">
-            <Logo isWhite={scrolled} />
+            <motion.div
+              initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9] }}
+            >
+              <Logo isWhite={scrolled} />
+            </motion.div>
 
             <ul className="hidden lg:flex gap-8 list-none items-center">
-              <NavbarItemSingle
-                scrolled={scrolled}
-                link={"/volunteers"}
-                label={"Dobrovolnictví"}
-              />
-              <NavbarItemMulti
-                scrolled={scrolled}
-                label={"O projektu"}
-                links={aboutDropdownLinks}
-              />
-              <NavbarItemSingle
-                scrolled={scrolled}
-                link={"/contact"}
-                label={"Kontakt"}
-              />
-
-              <li>
-                {user ? (
-                  <ProfileDropdown userData={userData} scrolled={scrolled} />
-                ) : (
-                  <Link href="/login" className={loginButtonClasses}>
-                    Přihlásit se
-                  </Link>
-                )}
-              </li>
+              <motion.div
+                initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.2, 0.65, 0.3, 0.9],
+                  delay: 0.1,
+                }}
+              >
+                <NavbarItemSingle
+                  scrolled={scrolled}
+                  link={"/volunteers"}
+                  label={"Dobrovolnictví"}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.2, 0.65, 0.3, 0.9],
+                  delay: 0.2,
+                }}
+              >
+                <NavbarItemMulti
+                  scrolled={scrolled}
+                  label={"O projektu"}
+                  links={aboutDropdownLinks}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.2, 0.65, 0.3, 0.9],
+                  delay: 0.3,
+                }}
+              >
+                <NavbarItemSingle
+                  scrolled={scrolled}
+                  link={"/contact"}
+                  label={"Kontakt"}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.2, 0.65, 0.3, 0.9],
+                  delay: 0.4,
+                }}
+              >
+                <li>
+                  {user ? (
+                    <ProfileDropdown userData={userData} scrolled={scrolled} />
+                  ) : (
+                    <Link href="/login" className={loginButtonClasses}>
+                      Přihlásit se
+                    </Link>
+                  )}
+                </li>
+              </motion.div>
             </ul>
 
-            <div className="flex items-center gap-4 lg:hidden">
+            <motion.div
+              className="flex items-center gap-4 lg:hidden"
+              initial={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.6,
+                ease: [0.2, 0.65, 0.3, 0.9],
+                delay: 0.4,
+              }}
+            >
               {user && (
                 <ProfileDropdown userData={userData} scrolled={scrolled} />
               )}
@@ -94,9 +154,9 @@ export default function NavbarClient({
               >
                 {isMobileMenuOpen ? <LuX size={28} /> : <LuMenu size={28} />}
               </button>
-            </div>
+            </motion.div>
           </div>
-        </nav>
+        </motion.nav>
 
         <div
           className={`fixed top-0 left-0 h-full w-full transition-all duration-300 ease-in-out ${
