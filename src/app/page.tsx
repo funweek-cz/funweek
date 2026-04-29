@@ -43,7 +43,7 @@ export default function Home() {
           className="hidden md:flex flex-1 relative h-full"
           initial={{ opacity: 0, filter: "blur(8px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1, ease: [0.2, 0.65, 0.3, 0.9] }}
+          transition={{ duration: 1, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 }}
         >
           <Image
             src="/images/hk.jpg"

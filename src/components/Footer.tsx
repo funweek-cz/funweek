@@ -1,11 +1,19 @@
+"use client"
+
 import React from "react";
 import { Milestone, Rss } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="px-5 md:px-10 mt-10">
+    <motion.footer
+      className="px-5 md:px-10 mt-10"
+      initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 1, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 }}
+    >
       <div className="max-w-7xl mx-auto py-10 px-10 bg-funweek text-white rounded-2xl">
         <div className="justify-between items-top w-full flex flex-col gap-5 md:gap-0 md:flex-row">
           <div className="flex flex-col items-top">
@@ -89,6 +97,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
