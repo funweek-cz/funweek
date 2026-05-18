@@ -40,6 +40,7 @@ export default function NavbarClient({
   const aboutDropdownLinks = [
     { label: "Co je Funweek?", link: "/about/project" },
     { label: "Náš tým", link: "/about/team" },
+    { label: "Harmonogram", link: "/about/harmonogram" },
   ];
 
   return (
